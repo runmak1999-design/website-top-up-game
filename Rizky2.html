@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopUp Game ARM STORE</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+/* NAVBAR */
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    background:white;
+    box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+
+.logo{
+    background:black;
+    color:white;
+    padding:8px 15px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+.menu a{
+    text-decoration:none;
+    margin:0 10px;
+    color:black;
+    font-weight:bold;
+}
+
+/* BANNER */
+.banner{
+    margin:20px;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.banner img{
+    width:100%;
+    border-radius:20px;
+}
+
+/* GRID GAME */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.game{
+    background:white;
+    padding:10px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 3px 8px rgba(0,0,0,0.2);
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.game:hover{
+    transform:scale(1.05);
+}
+
+.game img{
+    width:100%;
+    border-radius:20px;
+}
+
+.game p{
+    margin-top:10px;
+    font-weight:bold;
+}
+
+/* HALAMAN TOPUP */
+#topupPage{
+    display:none;
+    padding:20px;
+}
+
+.container{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.2);
+    max-width:400px;
+    margin:auto;
+}
+
+input, select{
+    width:90%;
+    padding:10px;
+    margin:10px;
+    border-radius:8px;
+    border:1px solid gray;
+}
+
+button{
+    padding:10px 20px;
+    background:#ff9800;
+    border:none;
+    color:white;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.back{
+    margin-bottom:15px;
+    display:inline-block;
+    cursor:pointer;
+    color:blue;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">LOGIN</div>
+    <div class="menu">
+        <a href="#">APLIKASI PREMIUM</a>
+        <a href="#">TOPUP</a>
+        <a href="#">AKUN PREMIUM</a>
+        <a href="#">JASA DESAIN</a>
+    </div>
+</div>
+
+<!-- HALAMAN UTAMA -->
+<div id="homePage">
+
+<div class="banner">
+    <img src="store.jpg">
+</div>
+
+<div class="grid">
+
+    <div class="game" onclick="openTopup('Mobile Legend')">
+        <img src="ml.jpg">
+        <p>Mobile Legend</p>
+    </div>
+
+    <div class="game" onclick="openTopup('Free Fire')">
+        <img src="epep.jpg">
+        <p>Free Fire</p>
+    </div>
+
+    <div class="game" onclick="openTopup('PUBG Mobile')">
+        <img src="pubg.jpg">
+        <p>PUBG Mobile</p>
+    </div>
+
+    <div class="game" onclick="openTopup('Roblox')">
+        <img src="roblox.jpg">
+        <p>Roblox</p>
+    </div>
+
+</div>
+</div>
+
+<!-- HALAMAN TOP UP -->
+<div id="topupPage">
+
+<div class="container">
+
+    <div class="back" onclick="goBack()">⬅ Kembali</div>
+
+    <h2 id="gameTitle"></h2>
+
+    <input <input type="text" id="idPlayer" placeholder="Masukkan ID Player">>
+
+    <select id="nominal">
+        <option>50 Diamonds - Rp10.000</option>
+        <option>100 Diamonds - Rp18.000</option>
+        <option>200 Diamonds - Rp35.000</option>
+    </select>
+
+    <select id="payment">
+        <option>DANA</option>
+        <option>OVO</option>
+        <option>GoPay</option>
+        <option>Transfer Bank</option>
+        <option>Watsaap</option>
+    </select>
+
+    <br>
+    <button onclick="kirimWA()">Beli Sekarang</button>
+
+</div>
+</div>
+
+<script>
+let selectedGame = "";
+
+function openTopup(gameName){
+    document.getElementById("homePage").style.display="none";
+    document.getElementById("topupPage").style.display="block";
+    document.getElementById("gameTitle").innerText="Top Up " + gameName;
+    selectedGame = gameName;
+}
+
+function goBack(){
+    document.getElementById("homePage").style.display="block";
+    document.getElementById("topupPage").style.display="none";
+}
+
+function kirimWA(){
+    let idPlayer = document.getElementById("idPlayer").value;
+    let nominal = document.getElementById("nominal").value;
+    let payment = document.getElementById("payment").value;
+
+    if(idPlayer === ""){
+        alert("Masukkan ID Player dulu!");
+        return;
+    }
+
+    let pesan = "Halo Admin, saya mau top up%0A%0A" +
+                "Game: " + selectedGame + "%0A" +
+                "ID: " + idPlayer + "%0A" +
+                "Paket: " + nominal + "%0A" +
+                "Pembayaran: " + payment;
+
+    window.open("https://wa.me/6289528157377?text=" + pesan, "_blank");
+}
+</script>
+</script>
+
+</body>
+</html>
